@@ -11,8 +11,6 @@
                     <input type="hidden" class="form-control" name="id" placeholder="ID" value="<?= $cuti['id']; ?>">
                     <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['nip']; ?>">
                     <input type="hidden" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" value="<?= $cuti['nama']; ?>">
-                    <input type="hidden" class="form-control" name="divisi" id="divisi" placeholder="Divisi" value="<?= $user['div']; ?>">
-                    <input type="hidden" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan" value="<?= $user['pos']; ?>">
 
                     <div class="form-group">
                     <label>Jenis Cuti</label>
@@ -49,7 +47,9 @@
 
                     <button type="submit" class="btn btn-primary">Ubah Pengajuan Cuti</button>
                     <a href="<?= base_url('cuti/hapusCuti/'.$cuti['id']); ?>" class="btn btn-danger tombol-hapus">Hapus</a>
-                    <a href="<?= base_url('cuti/index'); ?>" class="btn btn-light">Batal</a>
+                    
+                    
+                    <a href="#" class="btn btn-light back">Batal</a>
                     
                 </form>
                 
