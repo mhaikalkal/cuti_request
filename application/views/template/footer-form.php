@@ -16,6 +16,7 @@
     <!-- container-scroller -->
     <!-- plugins:js Buat Profile di Pojok Kiri Atas -->
     <script src="<?= base_url();?>vendor/Stellar/vendors/js/vendor.bundle.base.js"></script>
+    <script src="<?= base_url();?>vendor/Stellar/js/off-canvas.js"></script>
     <!-- endinject -->
 
     <!-- JQuery -->
