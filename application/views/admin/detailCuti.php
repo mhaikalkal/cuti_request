@@ -92,7 +92,7 @@
                     ?>
                     <tr>
                         <td colspan="2">    
-                            <a href="<?= base_url('cuti/editCuti/'.$detail['id']); ?>" class="btn btn-primary mr-2">Edit</a>
+                            <a href="<?= base_url('cuti/ubahCuti/'.$detail['id']); ?>" class="btn btn-primary mr-2">Edit</a>
                             <a href="<?= base_url('admin/manageCuti'); ?>" class="btn btn-light mr-2">Kembali</a>
                         </td>
                     </tr>
