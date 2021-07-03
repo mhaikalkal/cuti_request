@@ -66,7 +66,7 @@ class Cuti_model extends CI_model
             'nama' => $this->input->post('nama', TRUE),
             'id_divisi' => $this->input->post('divisi', TRUE),
             'id_jabatan' => $this->input->post('jabatan', TRUE),
-            'jenis_cuti' => $this->input->post('jenis_cuti', TRUE),
+            'id_jenis_cuti' => $this->input->post('jenis_cuti', TRUE),
             'keterangan' => $this->input->post('keterangan', TRUE),
             'tgl_awal' => $this->input->post('tgl_awal', TRUE),
             'tgl_akhir' => $this->input->post('tgl_akhir', TRUE),
@@ -83,9 +83,7 @@ class Cuti_model extends CI_model
             'id' => $this->input->post('id', TRUE),
             'nip' => $this->input->post('nip', TRUE),
             'nama' => $this->input->post('nama', TRUE),
-            'id_divisi' => $this->input->post('divisi', TRUE),
-            'id_jabatan' => $this->input->post('jabatan', TRUE),
-            'jenis_cuti' => $this->input->post('jenis_cuti', TRUE),
+            'id_jenis_cuti' => $this->input->post('jenis_cuti', TRUE),
             'keterangan' => $this->input->post('keterangan', TRUE),
             'tgl_awal' => $this->input->post('tgl_awal', TRUE),
             'tgl_akhir' => $this->input->post('tgl_akhir', TRUE),
@@ -126,7 +124,7 @@ class Cuti_model extends CI_model
         FROM
             cuti
             INNER JOIN user_profile ON cuti.nip = user_profile.nip
-            INNER JOIN jenis_cuti ON cuti.jenis_cuti = jenis_cuti.id
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id
             INNER JOIN divisi ON user_profile.divisi = divisi.id
             INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
             AND user_profile.jabatan = jabatan.id
@@ -163,7 +161,7 @@ class Cuti_model extends CI_model
             INNER JOIN divisi ON cuti.id_divisi = divisi.id
             INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
             AND cuti.id_jabatan = jabatan.id
-            INNER JOIN jenis_cuti ON cuti.jenis_cuti = jenis_cuti.id 
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
         ORDER BY
             cuti.`status` DESC,
             jenis_cuti.`value` DESC"
@@ -197,7 +195,7 @@ class Cuti_model extends CI_model
             INNER JOIN divisi ON cuti.id_divisi = divisi.id
             INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
             AND cuti.id_jabatan = jabatan.id
-            INNER JOIN jenis_cuti ON cuti.jenis_cuti = jenis_cuti.id 
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
         WHERE
             cuti.nip = $nip
         ORDER BY
@@ -232,7 +230,7 @@ class Cuti_model extends CI_model
             INNER JOIN divisi ON cuti.id_divisi = divisi.id
             INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
             AND cuti.id_jabatan = jabatan.id
-            INNER JOIN jenis_cuti ON cuti.jenis_cuti = jenis_cuti.id 
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
         WHERE
             cuti.id = $id"
 
