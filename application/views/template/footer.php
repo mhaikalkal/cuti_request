@@ -19,6 +19,10 @@
     <!-- Custom js for this page -->
     <script src="<?= base_url(); ?>vendor/Stellar/js/dashboard.js"></script>
     <!-- End custom js for this page -->
+
+    <!-- Buat dynamic header, pas page di resize -->
+    <script src="<?= base_url();?>vendor/Stellar/js/off-canvas.js"></script>
+
     <!-- Sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.all.min.js"></script>
     <script src="<?= base_url();?>assets/customizedSA.js"></script>
