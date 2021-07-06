@@ -54,7 +54,7 @@ class Admin extends CI_Controller {
             $data['jml_cuti'] = $this->Cuti_model->getAllCuti()->num_rows();
 
             $this->load->view('template/header', $data);
-            $this->load->view('Admin/index', $data);
+            $this->load->view('admin/index', $data);
             $this->load->view('template/footer');
         } else {
             // $this->session->set_flashdata('warning', 'Profile');
