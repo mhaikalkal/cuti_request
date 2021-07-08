@@ -99,12 +99,20 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
             <li class="nav-item nav-profile">
-                <a href="#" class="nav-link">
+                <a class="nav-link" data-toggle="collapse" href="#menu-profile" aria-expanded="false" aria-controls="ui-basic">
                     <div class="text-wrapper">
                         <p class="profile-name"><?= $user['nama']; ?></p>
                         <p class="designation"><?= $user['jabatan']; ?></p>
                     </div>
                 </a>
+
+                <div class="collapse" id="menu-profile">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="<?= base_url('profile/detailUser/') . $this->session->userdata('id');?>">Profile Saya</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= base_url();?>auth/logout">Logout</a></li>
+                    </ul>
+                </div>
+
             </li>
 
             <li class="nav-item nav-category">
