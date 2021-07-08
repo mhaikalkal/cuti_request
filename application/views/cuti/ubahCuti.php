@@ -9,8 +9,7 @@
                 
                 <form method="post" action="<?= base_url('cuti/ubahCuti/'.$cuti['id']); ?>">
                     <input type="hidden" class="form-control" name="id" placeholder="ID" value="<?= $cuti['id']; ?>">
-                    <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['nip']; ?>">
-                    <input type="hidden" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" value="<?= $cuti['nama']; ?>">
+                    <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['id_nip']; ?>">
 
                     <div class="form-group">
                     <label>Jenis Cuti</label>

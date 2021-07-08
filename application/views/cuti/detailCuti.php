@@ -13,7 +13,7 @@
                     <tbody>
                     <tr>
                         <td><b>NIP</b></td>
-                        <td><?= $detail['nip']; ?></td>
+                        <td><?= $detail['id_nip']; ?></td>
                     </tr>
                     <tr>
                         <td><b>Nama Lengkap</b></td>

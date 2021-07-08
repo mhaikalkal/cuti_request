@@ -9,15 +9,12 @@
                 
                 <form method="post" action="<?= base_url('humanRes/ubahCuti/'.$cuti['id']); ?>">
                     <input type="hidden" class="form-control" name="id" placeholder="ID" value="<?= $cuti['id']; ?>">
-                    <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['nip']; ?>">
-                    <input type="hidden" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" value="<?= $cuti['nama']; ?>">
-                    <input type="hidden" class="form-control" name="divisi" id="divisi" placeholder="Divisi" value="<?= $user['div']; ?>">
-                    <input type="hidden" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan" value="<?= $user['pos']; ?>">
+                    <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['id_nip']; ?>">
 
                     <div class="form-group">
                     <label for="jenis_cuti">Jenis Cuti</label>
                     <input type="text" class="form-control" name="jenis_cutiSHOW" id="jenis_cuti" placeholder="Jenis Cuti" value="<?= $cuti['jenis_cuti']; ?>" disabled>
-                    <input type="hidden" class="form-control" name="jenis_cuti" id="jenis_cuti" placeholder="Jenis Cuti" value="<?= $cuti['id_jenis']; ?>">
+                    <input type="hidden" class="form-control" name="jenis_cuti" id="jenis_cuti" placeholder="Jenis Cuti" value="<?= $cuti['id_jenis_cuti']; ?>">
                     <?= form_error('jenis_cuti', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
 

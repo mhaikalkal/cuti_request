@@ -8,7 +8,7 @@ $route['auth'] = 'Auth/login'; // Controller/view-nya
 $route['auth_process'] = 'Auth/auth_process'; // biar bisa form_open harus di route dulu
 
 // Admin
-$route['admin'] = 'Admin/index'; // Controller/view-nya
+$route['admin'] = 'Admin/index'; // Controller/function
 
 // HRD
 $route['hr'] = 'HumanRes/index'; // Controller/view-nya

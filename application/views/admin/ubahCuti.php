@@ -9,11 +9,8 @@
                 
                 <form method="post" action="<?= base_url('admin/ubahCuti/'.$cuti['id']); ?>">
                     <input type="hidden" class="form-control" name="id" placeholder="ID" value="<?= $cuti['id']; ?>">
-                    <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['nip']; ?>">
-                    <input type="hidden" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" value="<?= $cuti['nama']; ?>">
-                    <input type="hidden" class="form-control" name="divisi" id="divisi" placeholder="Divisi" value="<?= $user['divisi']; ?>">
-                    <input type="hidden" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan" value="<?= $user['jabatan']; ?>">
-
+                    <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['id_nip']; ?>">
+                    
                     <div class="form-group">
                     <label>Jenis Cuti</label>
                     <select class="form-control" name="jenis_cuti" id="jenis_cuti" style="width:100%">
