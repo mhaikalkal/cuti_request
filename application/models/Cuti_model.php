@@ -18,7 +18,7 @@ class Cuti_model extends CI_model
 
     public function getCutiByNIP($nip) 
     {
-        return $this->db->get_where('cuti', ['nip' => $nip]);
+        return $this->db->get_where('cuti', ['id_nip' => $nip]);
 
     }
 
@@ -31,21 +31,21 @@ class Cuti_model extends CI_model
 
     public function getCutiPendingByNIP($nip)
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE nip = ${nip} AND status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Menunggu Approval'");
         return $query;
 
     }
 
     public function getCutiApprovedByNIP($nip)
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE nip = ${nip} AND status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Menunggu Approval'");
         return $query;
 
     }
 
     public function getCutiDeclinedByNIP($nip)
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE nip = ${nip} AND status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Menunggu Approval'");
         return $query;
 
     }
@@ -62,10 +62,7 @@ class Cuti_model extends CI_model
     {
         $data = [
             'id' => $this->input->post('id', TRUE),
-            'nip' => $this->input->post('nip', TRUE),
-            'nama' => $this->input->post('nama', TRUE),
-            'id_divisi' => $this->input->post('divisi', TRUE),
-            'id_jabatan' => $this->input->post('jabatan', TRUE),
+            'id_nip' => $this->input->post('nip', TRUE),
             'id_jenis_cuti' => $this->input->post('jenis_cuti', TRUE),
             'keterangan' => $this->input->post('keterangan', TRUE),
             'tgl_awal' => $this->input->post('tgl_awal', TRUE),
@@ -81,8 +78,7 @@ class Cuti_model extends CI_model
     {
         $data = [
             'id' => $this->input->post('id', TRUE),
-            'nip' => $this->input->post('nip', TRUE),
-            'nama' => $this->input->post('nama', TRUE),
+            'id_nip' => $this->input->post('nip', TRUE),
             'id_jenis_cuti' => $this->input->post('jenis_cuti', TRUE),
             'keterangan' => $this->input->post('keterangan', TRUE),
             'tgl_awal' => $this->input->post('tgl_awal', TRUE),
@@ -110,7 +106,7 @@ class Cuti_model extends CI_model
         $query = $this->db->query(
             "SELECT
             cuti.id,
-            cuti.nip,
+            cuti.id_nip,
             user_profile.nama,
             divisi.divisi,
             jabatan.jabatan,
@@ -120,14 +116,15 @@ class Cuti_model extends CI_model
             cuti.tgl_awal,
             cuti.tgl_akhir,
             cuti.`status`,
-            cuti.edited_by 
+            cuti.edited_by,
+            jenis_cuti.`value` 
         FROM
             cuti
-            INNER JOIN user_profile ON cuti.nip = user_profile.nip
-            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id
+            INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
             INNER JOIN divisi ON user_profile.divisi = divisi.id
-            INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
-            AND user_profile.jabatan = jabatan.id
+            INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
+            AND divisi.id = jabatan.id_divisi
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id
         ORDER BY
 	        cuti.tgl_pengajuan DESC"
 
@@ -143,11 +140,11 @@ class Cuti_model extends CI_model
         $query = $this->db->query(
             "SELECT
             cuti.id,
-            cuti.nip,
+            cuti.id_nip,
             user_profile.nama,
-            jenis_cuti.jenis_cuti,
             divisi.divisi,
             jabatan.jabatan,
+            jenis_cuti.jenis_cuti,
             cuti.tgl_pengajuan,
             cuti.keterangan,
             cuti.tgl_awal,
@@ -157,10 +154,10 @@ class Cuti_model extends CI_model
             jenis_cuti.`value` 
         FROM
             cuti
-            INNER JOIN user_profile ON cuti.nip = user_profile.nip
-            INNER JOIN divisi ON cuti.id_divisi = divisi.id
-            INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
-            AND cuti.id_jabatan = jabatan.id
+            INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
+            INNER JOIN divisi ON user_profile.divisi = divisi.id
+            INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
+            AND divisi.id = jabatan.id_divisi
             INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
         ORDER BY
             cuti.`status` DESC,
@@ -175,9 +172,9 @@ class Cuti_model extends CI_model
     public function showCutiStaff($nip)
     {
         $query = $this->db->query(
-            "SELECT DISTINCT
+            "SELECT
             cuti.id,
-            cuti.nip,
+            cuti.id_nip,
             user_profile.nama,
             divisi.divisi,
             jabatan.jabatan,
@@ -191,13 +188,13 @@ class Cuti_model extends CI_model
             jenis_cuti.`value` 
         FROM
             cuti
-            INNER JOIN user_profile ON cuti.nip = user_profile.nip
-            INNER JOIN divisi ON cuti.id_divisi = divisi.id
-            INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
-            AND cuti.id_jabatan = jabatan.id
+            INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
+            INNER JOIN divisi ON user_profile.divisi = divisi.id
+            INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
+            AND divisi.id = jabatan.id_divisi
             INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
         WHERE
-            cuti.nip = $nip
+            cuti.id_nip = $nip
         ORDER BY
             cuti.tgl_pengajuan DESC"
         );
@@ -210,26 +207,18 @@ class Cuti_model extends CI_model
     {
         $query = $this->db->query(
             "SELECT
-            cuti.id,
-            cuti.nip,
+            cuti.*,
             user_profile.nama,
             divisi.divisi,
             jabatan.jabatan,
-            jenis_cuti.id AS id_jenis,
             jenis_cuti.jenis_cuti,
-            cuti.tgl_pengajuan,
-            cuti.keterangan,
-            cuti.tgl_awal,
-            cuti.tgl_akhir,
-            cuti.`status`,
-            cuti.edited_by,
             jenis_cuti.`value` 
         FROM
             cuti
-            INNER JOIN user_profile ON cuti.nip = user_profile.nip
-            INNER JOIN divisi ON cuti.id_divisi = divisi.id
-            INNER JOIN jabatan ON divisi.id = jabatan.id_divisi 
-            AND cuti.id_jabatan = jabatan.id
+            INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
+            INNER JOIN divisi ON user_profile.divisi = divisi.id
+            INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
+            AND divisi.id = jabatan.id_divisi
             INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
         WHERE
             cuti.id = $id"
