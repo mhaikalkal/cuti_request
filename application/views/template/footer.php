@@ -61,5 +61,65 @@
 
     </script>
 
+    <!-- Date Picker -->
+    <script>
+    $(document).ready(function(){
+        $('#tgl_awal').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            minYear: 1901,
+            maxYear: parseInt(moment().format('YYYY'),10),
+            locale: {format: 'YYYY-MM-DD'},
+        });
+
+        $('#tgl_akhir').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            minYear: 1901,
+            maxYear: parseInt(moment().format('YYYY'),10),
+            locale: {format: 'YYYY-MM-DD'},
+        });
+    });
+    </script>
+    
+
+    <!-- Searchbox Periode  -->
+    <script>
+        $(document).ready(function(){
+            $('#btn-search').click(function(){
+                $.ajax ({
+                    url: '<?= base_url('humanRes/searchCutiPeriode'); ?>',
+                    type: 'POST',
+                    data: {
+                        awal: $('#tgl_awal').val(),
+                        akhir: $('#tgl_akhir').val(),
+                    },
+                    dataType: "JSON",
+                    success: function(response){
+                        $('#dataCuti').html(response.showCuti);
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+
+<!-- <script>
+    const awal = document.querySelector('#tgl_awal');
+    const akhir = document.querySelector('#tgl_akhir');
+    
+    awal.addEventListener("click", function() {
+        console.log(this.value);
+
+    })
+
+    akhir.addEventListener("click", function() {
+        console.log(this.value);
+
+    })
+</script> -->
+
 </body>
 </html>

@@ -19,7 +19,7 @@
             <tr>
                 <td style="width: 190px;">NIP</td>
                 <td> : </td>
-                <td><?= $cuti['nip']; ?></>
+                <td><?= $cuti['id_nip']; ?></>
             </tr>
             <tr>
                 <td style="width: 190px;">Nama Lengkap</td>
