@@ -153,6 +153,5 @@ class HumanRes extends CI_Controller {
 		redirect('humanRes/manageCuti');
 
     }
-
     
 }

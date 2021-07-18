@@ -23,6 +23,11 @@
     <!-- Buat dynamic header, pas page di resize -->
     <script src="<?= base_url();?>vendor/Stellar/js/off-canvas.js"></script>
 
+    <!-- datepicker jquery -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
     <!-- Sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.all.min.js"></script>
     <script src="<?= base_url();?>assets/customizedSA.js"></script>
@@ -30,6 +35,7 @@
     <!-- Datatables / Harus Paling Bawah-->
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
+    <!-- Datatables -->
     <script>
         $(document).ready( function () {
             $('#table').DataTable({
@@ -42,6 +48,7 @@
 
     </script>
 
+    <!-- Waktu Dashboard -->
     <script>
         $(document).ready(function(){
             let timestamp = `<?= time(); ?>`;
@@ -88,7 +95,7 @@
         $(document).ready(function(){
             $('#btn-search').click(function(){
                 $.ajax ({
-                    url: '<?= base_url('humanRes/searchCutiPeriode'); ?>',
+                    url: '<?= base_url('cuti/searchCutiPeriode'); ?>',
                     type: 'POST',
                     data: {
                         awal: $('#tgl_awal').val(),
@@ -101,25 +108,26 @@
 
                 });
 
+            $('#btn-print').show();
+
             });
+
+            $('#btn-print').click(function(){
+                $.ajax({
+                    url: '<?= base_url('export/periodeMPDF'); ?>',
+                    type: 'POST',
+                    data: {
+                        awal: $('#tgl_awal').val(),
+                        akhir: $('#tgl_akhir').val(),
+                    },
+
+                });
+
+            })
 
         });
     </script>
 
-<!-- <script>
-    const awal = document.querySelector('#tgl_awal');
-    const akhir = document.querySelector('#tgl_akhir');
-    
-    awal.addEventListener("click", function() {
-        console.log(this.value);
-
-    })
-
-    akhir.addEventListener("click", function() {
-        console.log(this.value);
-
-    })
-</script> -->
 
 </body>
 </html>

@@ -17,9 +17,6 @@ class Export extends CI_Controller {
 
     public function mpdf($id)
     {
-        // Title
-        $data['judul'] = "Detail Cuti";
-
         // Navbar
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
@@ -47,5 +44,34 @@ class Export extends CI_Controller {
 
     }
 
+    public function periodeMPDF()
+    {
+        // Navbar
+        $sessID = $this->session->userdata('id');
+        $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        $awal = $this->input->post('awal');
+        $akhir = $this->input->post('akhir');
+
+        $data['awal'] = $awal;
+        $data['akhir'] = $akhir;
+
+        // Table
+        $data['cuti'] = $this->Cuti_model->searchPeriode($awal, $akhir)->result_array();
+        $data['total'] = $this->Cuti_model->searchPeriode($awal, $akhir)->num_rows();
+        $data = $this->load->view('pdf/periodeMPDF', $data, TRUE);
+        
+        // Load mPDF
+        $mpdf = new \Mpdf\Mpdf();
+
+        $mpdf->WriteHTML($data);
+
+        $judul = 'Laporan_Cuti_Periode_';
+        $periode = $awal . '-' . $akhir;
+
+        $filename = $judul . $periode . '.pdf';
+        $mpdf->Output($filename, 'D');
+
+    }
 
 }

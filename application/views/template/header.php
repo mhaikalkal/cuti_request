@@ -147,8 +147,10 @@
                     <ul class="nav flex-column sub-menu">
                     <?php if($this->session->userdata('level') === '1') { ?>
                         <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('admin/manageCuti'); ?> <?='">Manage Cuti</a></li>';?>
+                        <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('cuti/indexLaporan'); ?> <?='">Laporan</a></li>';?>
                     <?php } else if($this->session->userdata('level') === '2') { ?>
                         <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('humanRes/manageCuti'); ?> <?='">Manage Cuti</a></li>';?>
+                        <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('cuti/indexLaporan'); ?> <?='">Laporan</a></li>';?>
                     <?php } ?>
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/index'); ?>">Pengajuan Cuti</a></li>
                     </ul>

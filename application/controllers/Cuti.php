@@ -146,4 +146,47 @@ class Cuti extends CI_Controller {
 
     }
 
+    // Laporan, Cuma yg udah di approve
+    public function indexLaporan()
+    {
+        // Title
+        $data['judul'] = 'Manage Cuti';
+
+        // Navbar
+		$sessID = $this->session->userdata('id');
+        $sesslvl = $this->session->userdata('level');
+        $data['user'] = $this->User_model->User($sessID)->row_array();
+        $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Table Default
+        $data['cuti'] = $this->Cuti_model->showCuti()->result_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('cuti/indexLaporan', $data);
+        $this->load->view('template/footer');
+
+    }
+
+    public function searchCutiPeriode()
+    {
+        // Search Box
+        $awal = $this->input->post('awal');
+        $akhir = $this->input->post('akhir');
+
+        // execute search box
+        $cuti = $this->Cuti_model->searchPeriode($awal, $akhir)->result_array();
+
+        // load view laporan Periode, kirim isi tabelnya diisi array $cuti.
+        $showCuti = $this->load->view('cuti/laporanTable', array('cuti' => $cuti), TRUE);
+
+        // Buat array Callback
+        $callback = array(
+            'showCuti' => $showCuti, // set array showcuti dengan hasil view setelah search
+        );
+
+        echo json_encode($callback); // dikonversi jadi json
+
+    }
+
+
 }

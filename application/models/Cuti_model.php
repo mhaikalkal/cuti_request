@@ -134,6 +134,41 @@ class Cuti_model extends CI_model
 
     }
 
+    public function showCutiApproved()
+    {
+        $query = $this->db->query(
+            "SELECT
+            cuti.id,
+            cuti.id_nip,
+            user_profile.nama,
+            divisi.divisi,
+            jabatan.jabatan,
+            jenis_cuti.jenis_cuti,
+            cuti.tgl_pengajuan,
+            cuti.keterangan,
+            cuti.tgl_awal,
+            cuti.tgl_akhir,
+            cuti.`status`,
+            cuti.edited_by,
+            jenis_cuti.`value` 
+        FROM
+            cuti
+            INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
+            INNER JOIN divisi ON user_profile.divisi = divisi.id
+            INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
+            AND divisi.id = jabatan.id_divisi
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id
+        WHERE
+            cuti.status = 'Approved'
+        ORDER BY
+	        cuti.tgl_pengajuan DESC"
+
+        );
+
+        return $query;
+
+    }
+
     // HRD
     public function showCutiHRD()
     {
@@ -225,6 +260,40 @@ class Cuti_model extends CI_model
 
         );
 
+        return $query;
+
+    }
+
+    public function searchPeriode($awal, $akhir)
+    {
+        $query = $this->db->query(
+            "SELECT
+            cuti.id,
+            cuti.id_nip,
+            user_profile.nama,
+            divisi.divisi,
+            jabatan.jabatan,
+            jenis_cuti.jenis_cuti,
+            cuti.tgl_pengajuan,
+            cuti.keterangan,
+            cuti.tgl_awal,
+            cuti.tgl_akhir,
+            cuti.`status`,
+            cuti.edited_by,
+            jenis_cuti.`value` 
+        FROM
+            cuti
+            INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
+            INNER JOIN divisi ON user_profile.divisi = divisi.id
+            INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
+            AND divisi.id = jabatan.id_divisi
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id
+        WHERE (cuti.tgl_awal BETWEEN '$awal' AND '$akhir')
+        AND cuti.status = 'Approved'
+        ORDER BY 
+            cuti.tgl_awal DESC"
+        );
+        
         return $query;
 
     }

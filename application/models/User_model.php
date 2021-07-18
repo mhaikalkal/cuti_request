@@ -53,7 +53,7 @@ class User_model extends CI_model
     public function User($id)
     {
         $query = $this->db->query(
-            "SELECT DISTINCT
+            "SELECT
             `user`.id,
             `user`.username,
             `user`.`password`,
