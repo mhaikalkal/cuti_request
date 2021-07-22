@@ -180,12 +180,23 @@ class Cuti extends CI_Controller {
         $showCuti = $this->load->view('cuti/laporanTable', array('cuti' => $cuti), TRUE);
 
         // Buat array Callback
-        $callback = array(
-            'showCuti' => $showCuti, // set array showcuti dengan hasil view setelah search
+        $callback = array( 
+            'showCuti' => $showCuti, // $showCuti convert jd array 'showCuti' biar bisa diconvert ke json.
         );
 
         echo json_encode($callback); // dikonversi jadi json
 
+        // jadi stepnya
+        // 1. input tgl awal && tgl akhir
+        // 2. value tgl awa & akhir diambil pake ajax
+        // 3. Dimasukin ke method searchCutiPeriode() sama si ajax
+        // 4. seachCutiPeriode() execute ke model, cari data di DB nya.
+        // 5. Pas si model beres nyari return data ke $showCuti.
+        // 6. Belum bisa tampilin karena bentuk $showCuti belum jelas apaan.
+        // 7. Makanya bikin $callback buat ubah si $showCuti jadi array dan dikasih nama jadi 'showCuti'
+        // 8. Biar bisa tampil ke page makanya $callback diubah ke json biar nanti bisa dipanggil di response ajax.
+        // 9. ajax execute query response.showCuti (pas diubah jd array)
+        // 10. si Laporan table keiisi deh.
     }
 
 

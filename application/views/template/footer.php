@@ -93,23 +93,30 @@
     <!-- Searchbox Periode  -->
     <script>
         $(document).ready(function(){
-            $('#btn-search').click(function(){
+            $('#btn-search').click(function(){ // execute function pas click
                 $.ajax ({
-                    url: '<?= base_url('cuti/searchCutiPeriode'); ?>',
-                    type: 'POST',
-                    data: {
-                        awal: $('#tgl_awal').val(),
+                    url: '<?= base_url('cuti/searchCutiPeriode'); ?>', // method untuk carinya
+                    type: 'POST', // type nya POST apa GET 
+                    data: { // isi inputnya apa aja?
+                        awal: $('#tgl_awal').val(), 
                         akhir: $('#tgl_akhir').val(),
                     },
-                    dataType: "JSON",
+                    dataType: "JSON", // berubah jadi json
                     success: function(response){
-                        $('#dataCuti').html(response.showCuti);
+                        $('#dataCuti').html(response.showCuti); // showCuti ini array dari controller cuti
+
+                        if (!response.showCuti.includes("Data tidak Ditemukan.")) // Kalau data NULL maka tombol print ilang (gabisa di print)
+                        {
+                            $('#btn-print').show();
+
+                        } else // Kalau data ada maka tombol print muncul (bisa print)
+                        {
+                            $('#btn-print').hide();
+
+                        }
                     }
 
                 });
-
-            $('#btn-print').show();
-
             });
 
             $('#btn-print').click(function(){
