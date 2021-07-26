@@ -68,7 +68,7 @@
 
                         <div class="col-md-6 col-xl report-inner-card">
                             <div class="inner-card-text">
-                                <span class="report-title">Cuti Pending</span>
+                                <span class="report-title">Cuti Approved</span>
                                 <h6> Total : </h6>
                                 <span class="report-count"> <?= $acc; ?> Permohonan Cuti Approved</span>
                             </div>
@@ -79,7 +79,7 @@
 
                         <div class="col-md-6 col-xl report-inner-card">
                             <div class="inner-card-text">
-                                <span class="report-title">Cuti Pending</span>
+                                <span class="report-title">Cuti Declined</span>
                                 <h6> Total : </h6>
                                 <span class="report-count"> <?= $dec; ?> Permohonan Cuti Declined</span>
                             </div>

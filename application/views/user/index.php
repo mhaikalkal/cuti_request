@@ -30,14 +30,23 @@
                     <?php $no = 1; ?>
                     <?php foreach($users as $user) : ?>
                     <tr>
-                        <td><?= $no++; ?></td>
+                        <td style="width: 75px;"><?= $no++; ?></td>
                         <td><?= $user['username'];?></td>
                         <td><?= $user['level']; ?></td>
                         <td>
-                            <a href="<?= base_url('admin/detailProfile/'.$user['id']); ?>" class="badge bg-success icon-folder-alt" style="color:white;"> </a>
-                            <a href="<?= base_url('admin/userIndex/'.$user['id']); ?>" class="badge bg-primary icon-note" style="color:white;"> </a>
-                            <a href="<?= base_url('admin/ubahProfile/'.$user['id']); ?>" class="badge bg-info icon-note" style="color:white;"> </a>
-                            <a href="<?= base_url('admin/hapusUser/'.$user['id']); ?>" class="badge bg-danger icon-trash tombol-hapus" style="color:white;"> </a>
+                            <div class="btn-group">
+                            <button class="btn btn-danger btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a href="<?= base_url('admin/detailProfile/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-success icon-folder-alt "> </i> Detail Profile</a></li>
+                                    <li><a href="<?= base_url('admin/userIndex/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-primary icon-note"> </i> Ubah Informasi Akun </a></li>
+                                    <li><a href="<?= base_url('admin/ubahProfile/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-info icon-note"> </i> Ubah Profile</a></li>
+                                    <li><a href="<?= base_url('admin/hapusUser/'.$user['id']); ?>" class=" dropdown-item tombol-hapus"> <i class="badge bg-danger icon-trash"> </i> Hapus Akun </a></li>
+                                </ul>
+                            </div>
+
                         </td>
                     </tr>
                     <?php endforeach; ?>

@@ -47,7 +47,7 @@
                     <div class="form-group">
                     <label>Status Cuti</label>
                     <select class="form-control" name="status" id="status" style="width:100%">
-                        <option value="Menunggu Approval" selected>Menunggu Approval</option>
+                        <option value="Pending" selected>Pending</option>
                         <option value="Approved">Approved</option>
                         <option value="Declined">Declined</option>
                     </select>

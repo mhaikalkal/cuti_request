@@ -37,17 +37,17 @@
                         ?>
                     </td>
                     <td>
-                            <?php if($cuti['status'] == "Menunggu Approval")
+                            <?php if($cuti['status'] == "Pending")
                             {
                                 echo '<i class="icon-hourglass text-primary"></i> ' . $cuti['status'];
 
                             } else if($cuti['status'] == "Approved")
                             {
-                                echo '<i class="icon-check text-success fs-3"></i> ' . $cuti['status'];
+                                echo '<i class="icon-check text-success"></i> ' . $cuti['status'];
 
                             } else
                             {
-                                echo '<i class="bi bi-x-circle text-danger fs-3"></i> ' . $cuti['status'];
+                                echo '<i class="bi bi-x-circle text-danger"></i> ' . $cuti['status'];
 
                             }
                             ?>

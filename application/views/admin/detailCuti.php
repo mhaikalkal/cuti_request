@@ -65,17 +65,17 @@
                     <tr>
                         <td><b>Status</b></td>
                         <td>
-                        <?php if($detail['status'] == "Menunggu Approval")
+                        <?php if($detail['status'] == "Pending")
                             {
                                 echo '<i class="icon-hourglass text-primary"></i> ' . $detail['status'];
 
                             } else if($detail['status'] == "Approved")
                             {
-                                echo '<i class="icon-check text-success fs-3"></i> ' . $detail['status'];
+                                echo '<i class="icon-check text-success"></i> ' . $detail['status'];
 
                             } else
                             {
-                                echo '<i class="bi bi-x-circle text-danger fs-3"></i> ' . $detail['status'];
+                                echo '<i class="bi bi-x-circle text-danger"></i> ' . $detail['status'];
 
                             }
                         ?>
@@ -87,7 +87,7 @@
                     </tr>
 
                     <?php 
-                    if($detail['status'] == "Menunggu Approval")
+                    if($detail['status'] == "Pending")
                     { 
                     ?>
                     <tr>
