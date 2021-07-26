@@ -24,28 +24,28 @@ class Cuti_model extends CI_model
 
     public function getCutiPending()
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE status = 'Pending'");
         return $query;
 
     }
 
     public function getCutiPendingByNIP($nip)
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Pending'");
         return $query;
 
     }
 
     public function getCutiApprovedByNIP($nip)
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Approved'");
         return $query;
 
     }
 
     public function getCutiDeclinedByNIP($nip)
     {
-        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Menunggu Approval'");
+        $query = $this->db->query("SELECT * FROM cuti WHERE id_nip = ${nip} AND status = 'Declined'");
         return $query;
 
     }
