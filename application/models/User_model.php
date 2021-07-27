@@ -99,7 +99,7 @@ class User_model extends CI_model
 
     }
 
-    public function ubahPassword()
+    public function ubahUserPassword()
     {
         $data = [
             "id" => $this->input->post('id', TRUE),
@@ -110,12 +110,11 @@ class User_model extends CI_model
         $this->db->update('user', $data);
 
     }
-    
-    public function ubahLevel($id)
+
+    public function ubahUserLevel()
     {
         $data = [
             "id" => $this->input->post('id', TRUE),
-            'username' => $this->input->post('username', TRUE),
             "level" => $this->input->post('level', TRUE),
         ];
 
@@ -155,13 +154,11 @@ class User_model extends CI_model
             "SELECT
             `user`.id,
             `user`.username,
-            user_profile.nama,
             `user`.`password`,
             `level`.`level` 
         FROM
             `user`
             INNER JOIN `level` ON `user`.`level` = `level`.id
-            INNER JOIN user_profile ON `user`.id = user_profile.id
         WHERE `user`.id = $id"
         );
 

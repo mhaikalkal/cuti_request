@@ -41,7 +41,7 @@
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a href="<?= base_url('admin/detailProfile/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-success icon-folder-alt "> </i> Detail Profile</a></li>
-                                    <li><a href="<?= base_url('admin/userIndex/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-primary icon-note"> </i> Ubah Informasi Akun </a></li>
+                                    <li><a href="<?= base_url('admin/ubahUser/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-primary icon-note"> </i> Ubah User Settings </a></li>
                                     <li><a href="<?= base_url('admin/ubahProfile/'.$user['id']); ?>" class="dropdown-item"> <i class="badge bg-info icon-note"> </i> Ubah Profile</a></li>
                                     <li><a href="<?= base_url('admin/hapusUser/'.$user['id']); ?>" class=" dropdown-item tombol-hapus"> <i class="badge bg-danger icon-trash"> </i> Hapus Akun </a></li>
                                 </ul>

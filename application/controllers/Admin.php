@@ -168,23 +168,6 @@ class Admin extends CI_Controller {
 
     }
 
-    public function userIndex($id)
-    {
-        // Title
-        $data['judul'] = 'Ubah Data User';
-
-        // Navbar
-        $sessID = $this->session->userdata('id');
-        $data['user'] = $this->User_model->User($sessID)->row_array();
-
-        $data['profile'] = $this->User_model->pickUser($id)->row_array(); // dipassing kesini    
-    
-        $this->load->view('template/header', $data);
-        $this->load->view('user/userIndex', $data); // reload ulang
-        $this->load->view('template/footer-form');
-
-    }
-
     public function tambahUser()
 	{
 		// Title
@@ -218,43 +201,10 @@ class Admin extends CI_Controller {
 		}		
 	}
 
-    public function ubahPassword($id)
+    public function ubahUser($id)
     {
         // untuk navbar
-		$data['judul'] = 'Ubah Password User';
-
-		// Navbar
-        $sessID = $this->session->userdata('id');
-        $data['user'] = $this->User_model->User($sessID)->row_array();
-
-        // Value input box
-        $data['auser'] = $this->User_model->pickUser($id)->result_array();
-
-		// Form Validation
-		$this->form_validation->set_rules('username', 'Username', 'trim');
-		$this->form_validation->set_rules('new_password', 'Password Baru', 'required|trim');
-
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('template/header', $data);
-			$this->load->view('user/ubahPassword', $data); // reload ulang
-			$this->load->view('template/footer-form');
-
-		} else 
-		{
-			$this->User_model->ubahPassword();
-			$this->session->set_flashdata('flash', 'Diubah');
-
-			redirect('admin/userIndex/'.$id);
-
-		}	
-
-    }
-
-    public function ubahLevel($id)
-    {
-        // untuk navbar
-		$data['judul'] = 'Ubah Password User';
+		$data['judul'] = 'Ubah User Setting';
 
 		// Navbar
         $sessID = $this->session->userdata('id');
@@ -264,23 +214,55 @@ class Admin extends CI_Controller {
         $data['auser'] = $this->User_model->pickUser($id)->result_array();
         $data['level'] = $this->Data_model->getAllLevel()->result_array();
 
-		// Form Validation
-		$this->form_validation->set_rules('username', 'Username', 'trim');
+        $this->load->view('template/header', $data);
+        $this->load->view('user/ubahUser', $data); // reload ulang
+        $this->load->view('template/footer-form');
 
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('template/header', $data);
-			$this->load->view('user/ubahLevel', $data); // reload ulang
-			$this->load->view('template/footer-form');
+        // Kalau update Data
+        // kalo button submit ubah password, maka yg di eksekusi ya form_validation password
+        if(isset($_POST['password_btn']))
+        {
+            $this->form_validation->set_rules('username', 'Username', 'trim');
+            $this->form_validation->set_rules('new_password', 'Password Baru', 'required|trim');
+            $this->form_validation->set_rules('re_password', 'Ulangi Password Baru', 'required|trim|matches[new_password]');
 
-		} else 
-		{
-			$this->User_model->ubahLevel($id);
-			$this->session->set_flashdata('flash', 'Diubah');
+            // Kalo ubah Password
+            if ($this->form_validation->run() === FALSE)
+            {
+                $this->load->view('template/header', $data);
+                $this->load->view('user/ubahUser', $data); // reload ulang
+                $this->load->view('template/footer-form');
 
-			redirect('admin/userIndex/'.$id);
+            } else
+            {
+                $this->User_model->ubahUserPassword();
+                $this->session->set_flashdata('flash', 'Diubah');
 
-		}	
+                redirect('admin/ubahUser/'.$id);
+
+            }
+
+        } else if(isset($_POST['level_btn'])) // ubah level
+        {
+            $this->form_validation->set_rules('level', "Level", "trim");
+
+            if ($this->form_validation->run() === FALSE)
+            {
+                $this->load->view('template/header', $data);
+                $this->load->view('user/ubahUser', $data); // reload ulang
+                $this->load->view('template/footer-form');
+
+            } else
+            {
+                $this->User_model->ubahUserLevel();
+                $this->session->set_flashdata('flash', 'Diubah');
+
+                redirect('admin/ubahUser/'.$id);
+
+            }
+
+        }
+        
 
     }
     # END MANAGE USER #
