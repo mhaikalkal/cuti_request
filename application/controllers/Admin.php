@@ -7,6 +7,8 @@ class Admin extends CI_Controller {
     {
         parent::__construct();
 
+        $this->load->helper(array('form', 'url'));
+
         // Model
 		$this->load->model('Data_model');
         $this->load->model('Cuti_model');
@@ -372,6 +374,54 @@ class Admin extends CI_Controller {
 
         $this->load->helper('download');
         force_download($db_name, $backup);
+
+    }
+
+    public function settingWeb()
+    {
+        // untuk navbar
+		$data['judul'] = 'Ubah User Setting';
+
+		// Navbar
+        $sessID = $this->session->userdata('id');
+        $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        $this->load->view('template/header', $data);
+        $this->load->view('settings/webSetting', $data);
+        $this->load->view('template/footer-form');
+        
+    }
+
+    public function uploadSplashLogin()
+    {
+        $config['upload_path'] = '././vendor/Login/images/';
+        $config['allowed_types'] = "png|jpg";
+        $config['file_name'] = 'splashscreen.jpg'; // karena ga pake database, di provide default_name aja biar gampang
+        $config['overwrite'] = TRUE;
+        $config['max_size'] = '2048';
+        $config['remove_spaces'] = TRUE;
+        
+        $this->load->library('upload', $config);
+
+        if ( !$this->upload->do_upload('splash') )
+        {   
+            $error = '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">'
+                . $this->upload->display_errors() .
+                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+            $this->session->set_flashdata('image', $error);
+
+            redirect('admin/settingWeb', $data);
+
+
+        } else 
+        {
+            $data = ['splash_metadata' => $this->upload->data()];
+            $this->session->set_flashdata('flash', 'Diubah');
+            
+            redirect('admin/settingWeb', $data);
+        }
 
     }
 

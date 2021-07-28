@@ -46,32 +46,39 @@
         
         <ul class="navbar-nav navbar-nav-right ml-auto">
             <!-- Notification -->
+            <?php if($user > 0) :?>
             <?php if($this->session->userdata('level') === '2') { ?>
-            <?= '<li class="nav-item dropdown">
+            
+            <li class="nav-item dropdown">
                 <a class="nav-link count-indicator message-dropdown" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                    <i class="icon-bell"></i>';?>
+                    <i class="icon-bell"></i>
+
+                    <!-- Kalau ada permohonan, bell ada warna merah -->
                     <?php if($pending > 0) : ?>
-                        <?= '<span class="count">'?> <?= $pending; ?> <?='</span>';?>
+                        <span class="count"><?= $pending; ?></span>
                     <?php endif; ?>
-                <?= '</a>
+                </a>
                 
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">';?>
+                <!-- Kalau ada permohonan, ada notif dropdown -->
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
                 <?php if($pending > 0) { ?>
-                <?= 
-                '<a class="dropdown-item py-3" href="'?><?= base_url('humanRes/manageCuti'); ?><?='">
-                    <p class="mb-0 font-weight-medium float-left">Anda memiliki'?> <?= $pending; ?> <?= 'permohonan cuti untuk diproses. </p>
+                <a class="dropdown-item py-3" href="<?= base_url('humanRes/manageCuti'); ?>">
+                    <p class="mb-0 font-weight-medium float-left">Anda memiliki <?= $pending; ?> permohonan cuti untuk diproses. </p>
                     <span class="badge badge-pill badge-primary float-right">View all</span>
-                </a>'?>
-                <?php } else { ?>
-                <?= '<a class="dropdown-item py-3" href="'?><?= base_url('humanRes/manageCuti'); ?><?='">
-                    <p class="mb-0 font-weight-medium float-left">Anda memiliki'?> <?= $pending; ?> <?= 'permohonan cuti untuk diproses. </p>
+                </a>
+                <?php } else { ?> <!-- Kalau 0 Permohonan -->
+                <a class="dropdown-item py-3" href="<?= base_url('humanRes/manageCuti'); ?>">
+                    <p class="mb-0 font-weight-medium float-left">Anda memiliki <?= $pending; ?> permohonan cuti untuk diproses. </p>
                     <span class="badge badge-pill badge-primary float-right">View all</span>
-                </a>'; ?>
+                </a>
 
                 <?php } ?>
-                <?= '<div class="dropdown-divider"></div>
-            </li>'; ?>
+                
+            </li>
+            
             <?php } ?>
+            <?php endif; ?>
+            
             
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -164,16 +171,20 @@
                     <span class="menu-title">Manage User</span>
                     <i class="icon-people menu-icon"></i>
                 </a>
-            </li>' ?>
-            <?php } ?>
-
-            <?php if($this->session->userdata('level') === '1') { ?>
-            <?= '<li class="nav-item pro-upgrade">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="';?><?= base_url('admin/settingWeb'); ?><?='">
+                    <span class="menu-title">Pengaturan</span>
+                    <i class="icon-settings menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item pro-upgrade">
               <span class="nav-link">
                 <a class="btn btn-block px-0 btn-rounded btn-upgrade" href="'?> <?= base_url('admin/backupDB'); ?> <?='"> <i class="icon-cloud-download mx-2"></i> Backup Database </a>
               </span>
             </li>' ?>
             <?php } ?>
+
         </ul>
     </nav>
   

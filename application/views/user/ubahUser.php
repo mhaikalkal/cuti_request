@@ -9,43 +9,37 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Ubah User Setting</h4>
 
-                <!-- Accordion starts -->
-                <div class="accordion" id="accordionExample">
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <!-- Tab starts -->
+            
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="password-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
                             <b>Ubah Password</b>
                         </button>
-                        </h2>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="level-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                            <b>Ubah Role / Level</b>
+                        </button>
+                    </li>
+                </ul>
 
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
+                <div class="tab-content" id="myTabContent">
 
-                            <?php $this->load->view('user/ubahPassword'); ?>
-
-                        </div>
-                        </div>
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="password-tab">
+                        <br/>
+                        <?php $this->load->view('user/ubahPassword'); ?>
                     </div>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <b>Kelola Role / Level Akun</b>
-                        </button>
-                        </h2>
-
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            
-                            <?php $this->load->view('user/ubahLevel'); ?>
-
-                        </div>
-                        </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="level-tab">
+                        <br/>
+                        <?php $this->load->view('user/ubahLevel'); ?>
                     </div>
                     
                 </div>
-                <!-- Accordion Ends -->
+
+                
+                <!-- Tab Ends -->
                 
             </div>
         </div>

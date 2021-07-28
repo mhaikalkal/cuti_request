@@ -63,7 +63,7 @@ class Profile extends CI_Controller {
 		$data['pending'] = $this->Cuti_model->getCutiPending();
 
 		// untuk select box
-		$data['divisi'] = $this->Data_model->getAllDIvisi()->result_array();
+		$data['divisi'] = $this->Data_model->getAllDivisi()->result_array();
 
 		$this->form_validation->set_rules('id', 'ID', 'numeric');
 		$this->form_validation->set_rules('nip', 'NIP', 'required|max_length[24]');
