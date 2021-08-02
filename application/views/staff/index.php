@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                        <?php if($profile > NULL ) { ?>
+                        <?php if($profileKeisi > 0 ) { ?>
                         <?= 'Selamat Datang <b>';?><?=$user['nama']; ?><?='</b>, Semoga Harimu menyenangkan~'; ?>
                         <?php } else { ?>
                         <?= 'Selamat Datang <b>';?><?=$this->session->userdata('username'); ?><?='</b>, Semoga Harimu menyenangkan~ </br>Silahkan lengkapi profilemu.'; ?>

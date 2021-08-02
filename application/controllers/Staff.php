@@ -44,9 +44,9 @@ class Staff extends CI_Controller {
         $data['user'] = $this->User_model->User($sessID)->row_array();
         
         // Akun baru / belum isi profile
-        $data['profile'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
-        if($data['profile'] > 0 ) {
+        if($data['profileKeisi'] > 0 ) {
             // Head
             $data['judul'] = 'Staff Page';
 

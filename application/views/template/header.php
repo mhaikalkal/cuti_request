@@ -45,10 +45,9 @@
         <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Sistem Informasi Pengajuan CUTI</h5>
         
         <ul class="navbar-nav navbar-nav-right ml-auto">
-            <!-- Notification -->
-            <?php if($user > 0) :?>
-            <?php if($this->session->userdata('level') === '2') { ?>
-            
+            <!-- Notification -->            
+            <?php if($this->session->userdata('level') === '2') : ?>
+            <?php if($profileKeisi) : ?>
             <li class="nav-item dropdown">
                 <a class="nav-link count-indicator message-dropdown" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                     <i class="icon-bell"></i>
@@ -61,22 +60,22 @@
                 
                 <!-- Kalau ada permohonan, ada notif dropdown -->
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-                <?php if($pending > 0) { ?>
+                <?php if($pending > 0) : ?>
                 <a class="dropdown-item py-3" href="<?= base_url('humanRes/manageCuti'); ?>">
                     <p class="mb-0 font-weight-medium float-left">Anda memiliki <?= $pending; ?> permohonan cuti untuk diproses. </p>
                     <span class="badge badge-pill badge-primary float-right">View all</span>
                 </a>
-                <?php } else { ?> <!-- Kalau 0 Permohonan -->
+                <!-- Kalau 0 Permohonan -->
+                <?php else : ?> 
                 <a class="dropdown-item py-3" href="<?= base_url('humanRes/manageCuti'); ?>">
                     <p class="mb-0 font-weight-medium float-left">Anda memiliki <?= $pending; ?> permohonan cuti untuk diproses. </p>
                     <span class="badge badge-pill badge-primary float-right">View all</span>
                 </a>
-
-                <?php } ?>
+                <?php endif; ?>
                 
             </li>
             
-            <?php } ?>
+            <?php endif; ?>
             <?php endif; ?>
             
             
@@ -84,6 +83,9 @@
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <img class="img-xs rounded-circle ml-2" src="<?= base_url(); ?>vendor/Stellar/images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> <?= $user['nama']; ?> </span></a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                
+            <!-- Kalo profile udah keisi -->
+            <?php if($profileKeisi > 0) : ?> 
                 <div class="dropdown-header text-center">
                     <img class="img-md rounded-circle" src="<?= base_url(); ?>vendor/Stellar/images/faces/face8.jpg" alt="Profile image">
                     <p class="mb-1 mt-3"><?= $user['nama']; ?></p>
@@ -94,6 +96,10 @@
                 <a class="dropdown-item" href="<?= base_url();?>auth/logout"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
             </div>
             </li>
+            <!-- Kalo profile belum keiisi -->
+            <?php else : ?>
+                <a class="dropdown-item" href="<?= base_url();?>auth/logout"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+            <?php endif; ?>
         </ul>
         <!--  -->
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -106,6 +112,7 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+            <?php if($profileKeisi > 0) : ?>
             <li class="nav-item nav-profile">
                 <a class="nav-link" data-toggle="collapse" href="#menu-profile" aria-expanded="false" aria-controls="ui-basic">
                     <div class="text-wrapper">
@@ -120,29 +127,30 @@
                         <li class="nav-item"><a class="nav-link" href="<?= base_url();?>auth/logout">Logout</a></li>
                     </ul>
                 </div>
-
             </li>
+            <?php endif; ?>
 
+            <?php if($profileKeisi > 0) : ?>
             <li class="nav-item nav-category">
                 <span class="nav-link">Dashboard</span>
             </li>
 
             <li class="nav-item">
                 <?php if($this->session->userdata('level') === '1') { ?>
-                <?= '<a class="nav-link" href="'?> <?= base_url('admin'); ?> <?='">
+                <a class="nav-link" href="<?= base_url('admin'); ?>">
                     <span class="menu-title">Dashboard</span>
                     <i class="icon-screen-desktop menu-icon"></i>
-                </a>'; ?>
+                </a>
                 <?php } else if($this->session->userdata('level') === '2') { ?>
-                <?= '<a class="nav-link" href="'?> <?= base_url('hr'); ?> <?='">
+                <a class="nav-link" href="<?= base_url('hr'); ?>">
                     <span class="menu-title">Dashboard</span>
                     <i class="icon-screen-desktop menu-icon"></i>
-                </a>'; ?>
+                </a>
                 <?php } else if($this->session->userdata('level') === '3') { ?>
-                <?= '<a class="nav-link" href="'?> <?= base_url('staff'); ?> <?='">
+                <a class="nav-link" href="<?= base_url('staff'); ?>">
                     <span class="menu-title">Dashboard</span>
                     <i class="icon-screen-desktop menu-icon"></i>
-                </a>'; ?>
+                </a>
                 <?php } ?>
             </li>
 
@@ -154,11 +162,11 @@
                 <div class="collapse" id="menu-cuti">
                     <ul class="nav flex-column sub-menu">
                     <?php if($this->session->userdata('level') === '1') { ?>
-                        <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('admin/manageCuti'); ?> <?='">Manage Cuti</a></li>';?>
-                        <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('cuti/indexLaporan'); ?> <?='">Laporan</a></li>';?>
+                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/manageCuti'); ?>">Manage Cuti</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/indexLaporan'); ?>">Laporan</a></li>
                     <?php } else if($this->session->userdata('level') === '2') { ?>
-                        <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('humanRes/manageCuti'); ?> <?='">Manage Cuti</a></li>';?>
-                        <?= '<li class="nav-item"> <a class="nav-link" href="'?> <?= base_url('cuti/indexLaporan'); ?> <?='">Laporan</a></li>';?>
+                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('humanRes/manageCuti'); ?>">Manage Cuti</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/indexLaporan'); ?>">Laporan</a></li>
                     <?php } ?>
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/index'); ?>">Pengajuan Cuti</a></li>
                     </ul>
@@ -186,5 +194,9 @@
             <?php } ?>
 
         </ul>
+        <?php endif; ?>
+
+        <?php if(!$profileKeisi > 0) : ?>
+        <li class="nav-item"> <a class="nav-link" href="<?= base_url();?>auth/logout">Logout</a></li>
+        <?php endif; ?>
     </nav>
-  

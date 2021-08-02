@@ -44,10 +44,10 @@ class Admin extends CI_Controller {
         $data['user'] = $this->User_model->User($sessID)->row_array();
         
         // Akun baru / belum isi profile
-        $data['profile'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Kalo udah isi profile
-        if( $data['profile'] > 0 ) {
+        if( $data['profileKeisi'] > 0 ) {
             // Dashboard
             $data['jml_akun'] = $this->User_model->jumlahAkun();
             $data['jml_admin'] = $this->User_model->jumlahAdmin();
@@ -60,7 +60,7 @@ class Admin extends CI_Controller {
             $this->load->view('template/footer');
         } else {
             // $this->session->set_flashdata('warning', 'Profile');
-            redirect('profile/ubahProfile/'.$sessID);
+            redirect('profile/ubahProfile/'.$sessID, $data);
 
         }
 	}
@@ -75,6 +75,9 @@ class Admin extends CI_Controller {
 		$sessID = $this->session->userdata('id');
         $sesslvl = $this->session->userdata('level');
         $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         if($sesslvl === '3') :
             redirect('staff/index');
@@ -97,6 +100,9 @@ class Admin extends CI_Controller {
         // Navbar
 		$sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Table
         $data['detail'] = $this->Cuti_model->detailCuti($id)->row_array();
@@ -115,6 +121,9 @@ class Admin extends CI_Controller {
         // Navbar
 		$sessID = $this->session->userdata('id');
 		$data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         // Value input
         $data['cuti'] = $this->Cuti_model->getCutiById($id)->row_array();
@@ -160,6 +169,9 @@ class Admin extends CI_Controller {
         // Navbar
         $sessID = $this->session->userdata('id');
 		$data['user'] = $this->User_model->User($sessID)->row_array();
+        
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
             
         // Tabel
         $data['users'] = $this->User_model->showUsers()->result_array();
@@ -178,6 +190,9 @@ class Admin extends CI_Controller {
 		// Navbar
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         // Value Input
         $data['level'] = $this->Data_model->getAllLevel()->result_array();
@@ -211,6 +226,9 @@ class Admin extends CI_Controller {
 		// Navbar
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         // Value input box
         $data['auser'] = $this->User_model->pickUser($id)->result_array();
@@ -278,6 +296,9 @@ class Admin extends CI_Controller {
         // Navbar
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Table
         $data['anyprofile'] = $this->Profile_model->getProfile($id)->num_rows();
@@ -305,8 +326,12 @@ class Admin extends CI_Controller {
 
         $data['self'] = $id;
 
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
+        $data['pickeduser'] = $this->User_model->getUser($id)->row_array();
+
         // Table
-        $data['anyprofile'] = $this->Profile_model->getProfile($id)->num_rows();
+        $data['anyprofile'] = $this->Profile_model->getProfile($id)->num_rows(); // Akun yg dipilih
         $data['profile'] = $this->Profile_model->showProfile($id)->row_array();
 		$data['divisi'] = $this->Data_model->getAllDIvisi()->result_array();
         
@@ -318,24 +343,33 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 		$this->form_validation->set_rules('telp', 'Nomer Telepon', 'required|numeric');
 
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('template/header', $data);
-			$this->load->view('user/ubahProfile', $data); // reload ulang
-			$this->load->view('template/footer-form');
+        if($data['anyprofile'] > 0 ) {
+            if ($this->form_validation->run() === FALSE)
+            {
+                $this->load->view('template/header', $data);
+                $this->load->view('user/ubahProfile', $data); // reload ulang
+                $this->load->view('template/footer-form');
 
-		} else 
-		{
-			if($data['anyprofile'] != 0 )
-			{
-				$this->Profile_model->ubahProfile();
-				$this->session->set_flashdata('flash', 'Diubah');
-			} else {
+            } else {
+                $this->Profile_model->ubahProfile();
+                $this->session->set_flashdata('flash', 'Diubah');
+                redirect('admin/detailProfile/'.$id);
+
+            }
+        } else {
+            if ($this->form_validation->run() === FALSE)
+            {
+                $this->load->view('template/header', $data);
+                $this->load->view('user/tambahProfile', $data); // reload ulang
+                $this->load->view('template/footer-form');
+
+            } else {
                 $this->Profile_model->tambahProfile();
-				$this->session->set_flashdata('flash', 'Ditambahkan');
-			}
-			redirect('admin/detailProfile/'.$id);
-		}
+                $this->session->set_flashdata('flash', 'Ditambahkan');
+                redirect('admin/detailProfile/'.$id);
+
+            }
+        }
 
     }
 
@@ -344,7 +378,7 @@ class Admin extends CI_Controller {
     public function hapusUser($id)
     {
         $this->User_model->hapusUser($id);
-		$this->session->set_flashdata('flash', 'Dihapus / Dibatalkan');
+		$this->session->set_flashdata('flash', 'Dihapus');
 		redirect('admin/manageUser');
 
     }
@@ -385,6 +419,9 @@ class Admin extends CI_Controller {
 		// Navbar
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         $this->load->view('template/header', $data);
         $this->load->view('settings/webSetting', $data);

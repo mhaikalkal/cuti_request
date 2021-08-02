@@ -48,9 +48,9 @@ class HumanRes extends CI_Controller {
         $data['allcuti'] = $this->Cuti_model->getAllCuti()->num_rows();
         
         // Akun baru / belum isi profile
-        $data['profile'] = $this->Profile_model->getProfile($data['user']['id'])->num_rows();
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
-        if($data['profile'] > 0 ) {
+        if($data['profileKeisi'] > 0 ) {
             // Dashboard
             $this->load->view('template/header', $data);
             $this->load->view('hr/index', $data);
@@ -72,6 +72,9 @@ class HumanRes extends CI_Controller {
         $sesslvl = $this->session->userdata('level');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         if($sesslvl === '3') :
             redirect('staff/index');
@@ -100,6 +103,9 @@ class HumanRes extends CI_Controller {
         $sesslvl = $this->session->userdata('level');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Table
         $data['detail'] = $this->Cuti_model->detailCuti($id)->row_array();
@@ -120,6 +126,9 @@ class HumanRes extends CI_Controller {
         $sesslvl = $this->session->userdata('level');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         // Table
         $data['cuti'] = $this->Cuti_model->detailCuti($id)->row_array();

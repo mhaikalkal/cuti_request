@@ -29,6 +29,9 @@ class Cuti extends CI_Controller {
 		$sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Table
         $data['daftar_cuti'] = $this->Cuti_model->showCutiStaff($data['user']['nip'])->result_array();
@@ -57,6 +60,9 @@ class Cuti extends CI_Controller {
 		$sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Value input
         $data['jenis'] = $this->Cuti_model->getJenisCuti()->result_array();
@@ -92,6 +98,9 @@ class Cuti extends CI_Controller {
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
         
         // Table
         $data['detail'] = $this->Cuti_model->detailCuti($id)->row_array();
@@ -111,6 +120,9 @@ class Cuti extends CI_Controller {
         $sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         // Value input
         $data['cuti'] = $this->Cuti_model->getCutiById($id)->row_array();
@@ -157,6 +169,9 @@ class Cuti extends CI_Controller {
         $sesslvl = $this->session->userdata('level');
         $data['user'] = $this->User_model->User($sessID)->row_array();
         $data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+        // Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
         // Table Default
         $data['cuti'] = $this->Cuti_model->showCuti()->result_array();

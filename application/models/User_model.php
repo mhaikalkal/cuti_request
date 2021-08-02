@@ -127,7 +127,6 @@ class User_model extends CI_model
     {
         $this->db->where('id', $id);
         $this->db->delete('user');
-
     }
 
     // SHOW TABKE USER

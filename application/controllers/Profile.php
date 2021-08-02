@@ -25,7 +25,10 @@ class Profile extends CI_Controller {
         // Navbar
 		$sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
-		$data['pending'] = $this->Cuti_model->getCutiPending();
+		$data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+		// Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
 		// ISI TABEL DETAIL
 		$data['profile'] = $this->Profile_model->showProfile($id)->result_array();
@@ -60,7 +63,10 @@ class Profile extends CI_Controller {
         // Navbar
 		$sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
-		$data['pending'] = $this->Cuti_model->getCutiPending();
+		$data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+		// Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
 		// untuk select box
 		$data['divisi'] = $this->Data_model->getAllDivisi()->result_array();
@@ -73,23 +79,33 @@ class Profile extends CI_Controller {
 		$this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
 		$this->form_validation->set_rules('telp', 'Nomer Telepon', 'required|numeric');
 
-		if ($this->form_validation->run() === FALSE)
-		{
-			$this->load->view('template/header', $data);
-			$this->load->view('profile/ubahProfile', $data); // reload ulang
-			$this->load->view('template/footer-form');
+		if($data['profileKeisi'] > 0) {
+			if ($this->form_validation->run() === FALSE)
+			{
+				$this->load->view('template/header', $data);
+				$this->load->view('profile/ubahProfile', $data); // reload ulang
+				$this->load->view('template/footer-form');
 
-		} else 
-		{
-			if($data['user'] === NULL)
+			} else 
+			{
+				$this->Profile_model->ubahProfile();
+				$this->session->set_flashdata('flash', 'Diubah');	
+				redirect('profile/detailUser/'.$sessID);
+			}
+		} else {
+			if ($this->form_validation->run() === FALSE)
+			{
+				$this->load->view('template/header', $data);
+				$this->load->view('profile/tambahProfile', $data); // reload ulang
+				$this->load->view('template/footer-form');
+
+			} else 
 			{
 				$this->Profile_model->tambahProfile();
 				$this->session->set_flashdata('flash', 'Ditambahkan');
-			} else {
-				$this->Profile_model->ubahProfile();
-				$this->session->set_flashdata('flash', 'Diubah');
+				redirect('profile/detailUser/'.$sessID);
 			}
-			redirect('profile/detailUser/'.$sessID);
+
 		}
 		
 	}
@@ -102,7 +118,10 @@ class Profile extends CI_Controller {
         // Navbar
 		$sessID = $this->session->userdata('id');
         $data['user'] = $this->User_model->User($sessID)->row_array();
-		$data['pending'] = $this->Cuti_model->getCutiPending();
+		$data['pending'] = $this->Cuti_model->getCutiPending()->num_rows();
+
+		// Akun baru / belum isi profile
+        $data['profileKeisi'] = $this->db->get_where('user_profile', ['id' => $sessID])->num_rows();
 
 		// Form Validation
 		$this->form_validation->set_rules('username', 'Username', 'trim');

@@ -77,7 +77,7 @@ class Profile_model extends CI_model
         ];
 
         $this->db->where('id', $this->input->post('id'));
-        $this->db->replace('user_profile', $data);
+        $this->db->update('user_profile', $data);
 
     }
 
