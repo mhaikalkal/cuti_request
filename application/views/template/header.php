@@ -78,14 +78,12 @@
             <?php endif; ?>
             <?php endif; ?>
             
-            
+            <!-- Kalo profile udah keisi -->
+            <?php if($profileKeisi > 0) : ?> 
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <img class="img-xs rounded-circle ml-2" src="<?= base_url(); ?>vendor/Stellar/images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> <?= $user['nama']; ?> </span></a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                
-            <!-- Kalo profile udah keisi -->
-            <?php if($profileKeisi > 0) : ?> 
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">                  
                 <div class="dropdown-header text-center">
                     <img class="img-md rounded-circle" src="<?= base_url(); ?>vendor/Stellar/images/faces/face8.jpg" alt="Profile image">
                     <p class="mb-1 mt-3"><?= $user['nama']; ?></p>
@@ -98,7 +96,14 @@
             </li>
             <!-- Kalo profile belum keiisi -->
             <?php else : ?>
-                <a class="dropdown-item" href="<?= base_url();?>auth/logout"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+            <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
+                <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false"></a>
+                
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">                  
+                    <a class="dropdown-item" href="<?= base_url();?>auth/logout"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+                </div>
+
+            </li>
             <?php endif; ?>
         </ul>
         <!--  -->
@@ -197,6 +202,6 @@
         <?php endif; ?>
 
         <?php if(!$profileKeisi > 0) : ?>
-        <li class="nav-item"> <a class="nav-link" href="<?= base_url();?>auth/logout">Logout</a></li>
+        <li class="nav-item"> <a class="nav-link" href="<?= base_url();?>auth/logout">Sign Out</a></li>
         <?php endif; ?>
     </nav>
