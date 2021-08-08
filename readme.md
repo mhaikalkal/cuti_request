@@ -9,7 +9,7 @@
 
 <br />
 <br />
-
+There are 3 test accounts, those are : <br />
 - Admin Account : <br />
   User : admin <br />
   Pass : admin <br />
