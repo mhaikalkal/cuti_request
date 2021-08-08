@@ -186,17 +186,15 @@ class Cuti_model extends CI_model
             cuti.tgl_akhir,
             cuti.`status`,
             cuti.edited_by,
-            jenis_cuti.`value` 
+            jenis_cuti.`value`,
+            ROW_NUMBER() OVER ( ORDER BY cuti.`status` DESC, jenis_cuti.`value` DESC ) AS `urutan` 
         FROM
             cuti
             INNER JOIN user_profile ON cuti.id_nip = user_profile.nip
             INNER JOIN divisi ON user_profile.divisi = divisi.id
             INNER JOIN jabatan ON user_profile.jabatan = jabatan.id 
             AND divisi.id = jabatan.id_divisi
-            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id 
-        ORDER BY
-            cuti.`status` DESC,
-            jenis_cuti.`value` DESC"
+            INNER JOIN jenis_cuti ON cuti.id_jenis_cuti = jenis_cuti.id"
 
         );
 

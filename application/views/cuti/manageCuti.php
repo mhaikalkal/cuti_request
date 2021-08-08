@@ -101,12 +101,18 @@
                                 }
                             } else if($this->session->userdata('level') === '2')
                             {
+                                // var_dump($cuti['urutan']);
                                 if($cuti['status'] == "Pending")
                                 {
                                 ?>
-                                    <a href="<?= base_url('humanRes/detailCuti/'.$cuti['id']); ?>" class="badge bg-success icon-folder-alt" style="color:white;"> </a>
-                                    <a href="<?= base_url('humanRes/ubahCuti/'.$cuti['id']); ?>" class="badge bg-primary icon-note" style="color:white;"> </a>
-                                    <a href="<?= base_url('humanRes/hapusCuti/'.$cuti['id']); ?>" class="badge bg-danger icon-trash tombol-hapus" style="color:white;"> </a>
+                                    <?php if($cuti['urutan'] === '1') : ?>
+                                        <a href="<?= base_url('humanRes/detailCuti/'.$cuti['id']); ?>" class="badge bg-success icon-folder-alt" style="color:white;"> </a>
+                                        <a href="<?= base_url('humanRes/ubahCuti/'.$cuti['id']); ?>" class="badge bg-primary icon-note" style="color:white;"> </a>
+                                        <a href="<?= base_url('humanRes/hapusCuti/'.$cuti['id']); ?>" class="badge bg-danger icon-trash tombol-hapus" style="color:white;"> </a>
+                                    <?php else : ?>
+                                        <a href="<?= base_url('humanRes/detailCuti/'.$cuti['id']); ?>" class="badge bg-success icon-folder-alt" style="color:white;"> </a>
+                                        <a href="<?= base_url('humanRes/hapusCuti/'.$cuti['id']); ?>" class="badge bg-danger icon-trash tombol-hapus" style="color:white;"> </a>
+                                    <?php endif; ?>
 
                                 <?php
                                 } else if($cuti['status'] == "Approved")
