@@ -60,9 +60,9 @@
 
                         <div class="col-md-6 col-xl report-inner-card">
                             <div class="inner-card-text">
-                                <span class="report-title">HR Accounts</span>
+                                <span class="report-title">Manager Accounts</span>
                                 <h6> Total : </h6>
-                                <span class="report-count"> <?= $jml_hr; ?> Accounts</span>
+                                <span class="report-count"> <?= $jml_manager; ?> Accounts</span>
                             </div>
                             <div class="inner-card-icon bg-info">
                                 <i class="icon-user-following"></i>

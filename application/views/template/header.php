@@ -61,13 +61,13 @@
                 <!-- Kalau ada permohonan, ada notif dropdown -->
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
                 <?php if($pending > 0) : ?>
-                <a class="dropdown-item py-3" href="<?= base_url('humanRes/manageCuti'); ?>">
+                <a class="dropdown-item py-3" href="<?= base_url('manager/manageCuti'); ?>">
                     <p class="mb-0 font-weight-medium float-left">Anda memiliki <?= $pending; ?> permohonan cuti untuk diproses. </p>
                     <span class="badge badge-pill badge-primary float-right">View all</span>
                 </a>
                 <!-- Kalau 0 Permohonan -->
                 <?php else : ?> 
-                <a class="dropdown-item py-3" href="<?= base_url('humanRes/manageCuti'); ?>">
+                <a class="dropdown-item py-3" href="<?= base_url('manager/manageCuti'); ?>">
                     <p class="mb-0 font-weight-medium float-left">Anda memiliki <?= $pending; ?> permohonan cuti untuk diproses. </p>
                     <span class="badge badge-pill badge-primary float-right">View all</span>
                 </a>
@@ -147,7 +147,7 @@
                     <i class="icon-screen-desktop menu-icon"></i>
                 </a>
                 <?php } else if($this->session->userdata('level') === '2') { ?>
-                <a class="nav-link" href="<?= base_url('hr'); ?>">
+                <a class="nav-link" href="<?= base_url('manager'); ?>">
                     <span class="menu-title">Dashboard</span>
                     <i class="icon-screen-desktop menu-icon"></i>
                 </a>
@@ -170,7 +170,7 @@
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url('admin/manageCuti'); ?>">Manage Cuti</a></li>
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/indexLaporan'); ?>">Laporan</a></li>
                     <?php } else if($this->session->userdata('level') === '2') { ?>
-                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('humanRes/manageCuti'); ?>">Manage Cuti</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="<?= base_url('manager/manageCuti'); ?>">Manage Cuti</a></li>
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/indexLaporan'); ?>">Laporan</a></li>
                     <?php } ?>
                         <li class="nav-item"> <a class="nav-link" href="<?= base_url('cuti/index'); ?>">Pengajuan Cuti</a></li>

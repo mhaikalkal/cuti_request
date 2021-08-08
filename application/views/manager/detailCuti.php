@@ -92,8 +92,8 @@
                     ?>
                     <tr>
                         <td colspan="2">    
-                            <a href="<?= base_url('humanRes/ubahCuti/'.$detail['id']); ?>" class="btn btn-primary mr-2">Edit</a>
-                            <a href="<?= base_url('humanRes/manageCuti'); ?>" class="btn btn-light mr-2">Kembali</a>
+                            <a href="<?= base_url('manager/ubahCuti/'.$detail['id']); ?>" class="btn btn-primary mr-2">Edit</a>
+                            <a href="<?= base_url('manager/manageCuti'); ?>" class="btn btn-light mr-2">Kembali</a>
                         </td>
                     </tr>
                     <?php
@@ -102,7 +102,7 @@
                     ?>
                     <tr>
                         <td colspan="2">
-                            <a href="<?= base_url('humanRes/manageCuti'); ?>" class="btn btn-light mr-2">Kembali</a>
+                            <a href="<?= base_url('manager/manageCuti'); ?>" class="btn btn-light mr-2">Kembali</a>
                         </td>
                     </tr>
                     <?php

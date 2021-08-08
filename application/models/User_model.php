@@ -35,7 +35,7 @@ class User_model extends CI_model
 
     }
 
-    public function jumlahHR()
+    public function jumlahManager()
     {
         $this->db->where('level', '2');
         return $this->db->get('user')->num_rows();

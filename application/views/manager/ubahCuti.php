@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h4 class="card-title mb-4">Form Ubah Pengajuan Cuti</h4>
                 
-                <form method="post" action="<?= base_url('humanRes/ubahCuti/'.$cuti['id']); ?>">
+                <form method="post" action="<?= base_url('manager/ubahCuti/'.$cuti['id']); ?>">
                     <input type="hidden" class="form-control" name="id" placeholder="ID" value="<?= $cuti['id']; ?>">
                     <input type="hidden" class="form-control" name="nip" placeholder="NIP" value="<?= $cuti['id_nip']; ?>">
 
@@ -60,7 +60,7 @@
                     <input type="hidden" class="form-control" name="edited_by" placeholder="Edited By" value="<?= $this->session->userdata('username'); ?>">
 
                     <button type="submit" class="btn btn-primary">Ubah Pengajuan Cuti</button>
-                    <a href="<?= base_url('humanRes/manageCuti'); ?>" class="btn btn-light">Batal</a>
+                    <a href="<?= base_url('manager/manageCuti'); ?>" class="btn btn-light">Batal</a>
                     
                 </form>
                 

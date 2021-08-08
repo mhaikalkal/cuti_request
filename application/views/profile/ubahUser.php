@@ -43,7 +43,7 @@
                 <?php if($this->session->userdata('level') === '1') :  ?>
                     <a href="<?= base_url('admin'); ?>" class="btn btn-light">Batal</a>
                 <?php elseif($this->session->userdata('level') === '2') :  ?>
-                    <a href="<?= base_url('humanRes'); ?>" class="btn btn-light">Batal</a>
+                    <a href="<?= base_url('manager'); ?>" class="btn btn-light">Batal</a>
                 <?php elseif($this->session->userdata('level') === '3') :  ?>
                     <a href="<?= base_url('staff'); ?>" class="btn btn-light">Batal</a>
                 <?php else : ?>

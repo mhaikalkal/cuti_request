@@ -170,7 +170,7 @@ class Cuti_model extends CI_model
     }
 
     // HRD
-    public function showCutiHRD()
+    public function showCutiManager()
     {
         $query = $this->db->query(
             "SELECT

@@ -27,7 +27,7 @@ class Staff extends CI_Controller {
     
             } else if($level === '2')
             {
-                redirect('hr');
+                redirect('manager');
                 
             }
 

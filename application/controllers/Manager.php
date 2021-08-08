@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HumanRes extends CI_Controller {
+class Manager extends CI_Controller {
 
 	public function __construct()
     {
@@ -37,7 +37,7 @@ class HumanRes extends CI_Controller {
 	public function index()
 	{
 		// Title
-        $data['judul'] = 'Human Resource Department Page';
+        $data['judul'] = 'Manager Page';
 
         // Navbar
 		$sessID = $this->session->userdata('id');
@@ -53,7 +53,7 @@ class HumanRes extends CI_Controller {
         if($data['profileKeisi'] > 0 ) {
             // Dashboard
             $this->load->view('template/header', $data);
-            $this->load->view('hr/index', $data);
+            $this->load->view('manager/index', $data);
             $this->load->view('template/footer');
         } else {
             // $this->session->set_flashdata('warning', 'Profile');
@@ -82,7 +82,7 @@ class HumanRes extends CI_Controller {
 
         // Table
         if($data['pending'] > 0) {
-            $data['daftar_cuti'] = $this->Cuti_model->showCutiHRD()->result_array();        
+            $data['daftar_cuti'] = $this->Cuti_model->showCutiManager()->result_array();        
         } else {
             $data['daftar_cuti'] = $this->Cuti_model->showCuti()->result_array();
         }
@@ -111,7 +111,7 @@ class HumanRes extends CI_Controller {
         $data['detail'] = $this->Cuti_model->detailCuti($id)->row_array();
 
         $this->load->view('template/header', $data);
-        $this->load->view('hr/detailCuti', $data);
+        $this->load->view('manager/detailCuti', $data);
         $this->load->view('template/footer');        
 
     }
@@ -142,14 +142,14 @@ class HumanRes extends CI_Controller {
         if($this->form_validation->run() == FALSE)
         {
             $this->load->view('template/header', $data);
-            $this->load->view('hr/ubahCuti', $data);
+            $this->load->view('manager/ubahCuti', $data);
             $this->load->view('template/footer-form');
 
         } else 
         {
             $this->Cuti_model->ubahCuti();
             $this->session->set_flashdata('flash', 'Diubah');
-            redirect('humanRes/manageCuti');
+            redirect('Manager/manageCuti');
 
         }
 
@@ -159,7 +159,7 @@ class HumanRes extends CI_Controller {
     {
         $this->Cuti_model->hapusCuti($id);
 		$this->session->set_flashdata('flash', 'Dihapus / Dibatalkan');
-		redirect('humanRes/manageCuti');
+		redirect('Manager/manageCuti');
 
     }
     

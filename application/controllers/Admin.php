@@ -26,7 +26,7 @@ class Admin extends CI_Controller {
             redirect('auth');
         else :
             if($level === '2') :
-                redirect('hr');
+                redirect('manager');
             elseif($level === '3') : 
                 redirect('staff');
             endif;
@@ -51,7 +51,7 @@ class Admin extends CI_Controller {
             // Dashboard
             $data['jml_akun'] = $this->User_model->jumlahAkun();
             $data['jml_admin'] = $this->User_model->jumlahAdmin();
-            $data['jml_hr'] = $this->User_model->jumlahHR();
+            $data['jml_manager'] = $this->User_model->jumlahManager();
             $data['jml_staff'] = $this->User_model->jumlahStaff();
             $data['jml_cuti'] = $this->Cuti_model->getAllCuti()->num_rows();
 
@@ -313,8 +313,6 @@ class Admin extends CI_Controller {
 
     }
 
-
-
     public function ubahProfile($id)
     {
         // Title
@@ -371,9 +369,7 @@ class Admin extends CI_Controller {
             }
         }
 
-    }
-
-    
+    }    
 
     public function hapusUser($id)
     {

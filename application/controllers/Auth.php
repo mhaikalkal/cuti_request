@@ -12,7 +12,7 @@ class Auth extends CI_Controller {
                 redirect('admin');
             }
             else if ( $this->session->userdata('level') === '2' ) {
-                redirect('hr');
+                redirect('manager');
             }
             else if ( $this->session->userdata('level') === '3' ) {
                 redirect('staff');
@@ -60,7 +60,7 @@ class Auth extends CI_Controller {
                 ];
 
                 $this->session->set_userdata($sesi);
-                redirect('hr');
+                redirect('manager');
             } else if( $data->level === '3' ) {
                 $sesi = [
                     'id' => $data->id,

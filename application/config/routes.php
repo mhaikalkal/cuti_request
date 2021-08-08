@@ -11,7 +11,7 @@ $route['auth_process'] = 'Auth/auth_process'; // biar bisa form_open harus di ro
 $route['admin'] = 'Admin/index'; // Controller/function
 
 // HRD
-$route['hr'] = 'HumanRes/index'; // Controller/view-nya
+$route['manager'] = 'Manager/index'; // Controller/view-nya
 
 // Karyawan
 $route['staff'] = 'Staff/index'; // Controller/view-nya
